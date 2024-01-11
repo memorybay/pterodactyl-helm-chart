@@ -12,6 +12,6 @@ entries:
     - https://github.com/memorybay/pterodactyl-helm-chart/tree/master/
     type: application
     urls:
-    - https://github.com/memorybay/pterodactyl-helm-chart/releases/download/pterodactyl-panel-0.1.0/pterodactyl-panel-0.1.0.tgz
+    - https://github.com/memorybay/pterodactyl-helm-chart/releases/download/0.1.0/pterodactyl-chart-0.1.0.tgz
     version: 0.1.0
 generated: "2024-01-11T01:33:59.613443767+01:00"
