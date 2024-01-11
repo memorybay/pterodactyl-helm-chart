@@ -1,3 +1,17 @@
 apiVersion: v1
-entries: {}
+entries:
+  pterodactyl-panel:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2024-01-11T01:33:59.613443767+01:00"
+    description: A Helm chart for Pterodactyl game panel
+    digest: 5d9557a06da5f67da2f6fe50db599cfbed308746d66650c67f566ecf4ed6a3be
+    home: https://github.com/memorybay/pterodactyl-helm-chart
+    name: pterodactyl-panel
+    sources:
+    - https://github.com/memorybay/pterodactyl-helm-chart/tree/master/
+    type: application
+    urls:
+    - https://github.com/memorybay/pterodactyl-helm-chart/releases/download/pterodactyl-panel-0.1.0/pterodactyl-panel-0.1.0.tgz
+    version: 0.1.0
 generated: "2024-01-11T01:33:59.613443767+01:00"
