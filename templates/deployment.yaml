@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.fullnameOverride }}
+  labels:
+    app: {{ .Values.fullnameOverride }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.fullnameOverride }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.fullnameOverride }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.panel }}"
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+          env:
+            - name: APP_ENV
+              value: "production"
+            - name: APP_ENVIRONMENT_ONLY
+              value: "false"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.fullnameOverride }}-mariadb
+                  key: mariadb-password
+            - name: APP_URL
+              value: {{ .Values.common.panel.appURL | quote }}
+            - name: APP_TIMEZONE
+              value: {{ .Values.common.panel.appTimezone | quote }}
+            - name: APP_SERVICE_AUTHOR
+              value: {{ .Values.common.panel.appServiceAuthor | quote }}
+            - name: MAIL_FROM
+              value: {{ .Values.common.mail.mailFrom | quote }}
+            - name: MAIL_DRIVER
+              value: {{ .Values.common.mail.mailDriver | quote }}
+            - name: MAIL_HOST
+              value: {{ .Values.common.mail.mailHost | quote }}
+            - name: MAIL_PORT
+              value: {{ .Values.common.mail.mailPort | quote }}
+            - name: MAIL_USERNAME
+              value: {{ .Values.common.mail.mailUsername | quote }}
+            - name: MAIL_PASSWORD
+              value: {{ .Values.common.mail.mailPassword | quote }}
+            - name: MAIL_ENCRYPTION
+              value: {{ .Values.common.mail.mailEncryption | quote }}
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecrets }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+

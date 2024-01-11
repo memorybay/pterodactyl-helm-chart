@@ -1,0 +1,42 @@
+common:
+  database:
+    mysqlPassword: "CHANGE_ME"
+    mysqlRootPassword: "CHANGE_ME_TOO"
+  panel:
+    appURL: "http://example.com"
+    appTimezone: "UTC"
+    appServiceAuthor: "noreply@example.com"
+  mail:
+    mailFrom: "noreply@example.com"
+    mailDriver: "smtp"
+    mailHost: "mail"
+    mailPort: "1025"
+    mailUsername: ""
+    mailPassword: ""
+    mailEncryption: "true"
+
+image:
+  panel: "ghcr.io/pterodactyl/panel:latest"
+
+service:
+  fullnameOverride: "pterodactyl-release"  # Added this line
+  panel:
+    ports:
+      http: 80
+      https: 443
+
+persistence:
+  database:
+    enabled: true
+    existingClaim: ""
+
+  panel:
+    enabled: true
+    existingClaim: ""
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
